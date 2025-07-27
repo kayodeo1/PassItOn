@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PassItOn - Student Platform</title>
+	<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, sans-serif;
+	background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #f3e8ff 100%);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+}
+
+.container {
+	width: 100%;
+	max-width: 400px;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.logo {
+	width: 64px;
+	height: 64px;
+	background: linear-gradient(135deg, #2563eb, #9333ea);
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.logo svg {
+	width: 32px;
+	height: 32px;
+	fill: white;
+}
+
+.brand-title {
+	font-size: 2rem;
+	font-weight: 700;
+	background: linear-gradient(135deg, #2563eb, #9333ea);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin-bottom: 0.5rem;
+}
+
+.brand-subtitle {
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+
+.card {
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(10px);
+	border-radius: 1rem;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	overflow: hidden;
+}
+
+.card-header {
+	padding: 2rem 2rem 1rem;
+	text-align: center;
+}
+
+.card-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1f2937;
+	margin-bottom: 0.5rem;
+}
+
+.card-description {
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+
+.card-content {
+	padding: 0 2rem 2rem;
+}
+
+.form-group {
+	margin-bottom: 1rem;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.label {
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #374151;
+	margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+	position: relative;
+}
+
+.ui-inputfield, input[type="text"], input[type="password"] {
+	width: 100% !important;
+	padding: 0.75rem !important;
+	border: 1px solid #d1d5db !important;
+	border-radius: 0.5rem !important;
+	font-size: 0.875rem !important;
+	transition: all 0.2s ease !important;
+	background: white !important;
+	box-sizing: border-box !important;
+}
+
+.ui-inputfield:focus, input[type="text"]:focus, input[type="password"]:focus
+	{
+	outline: none !important;
+	border-color: #2563eb !important;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+.ui-button, .button {
+	width: 100% !important;
+	padding: 0.75rem !important;
+	background: linear-gradient(135deg, #2563eb, #9333ea) !important;
+	color: white !important;
+	border: none !important;
+	border-radius: 0.5rem !important;
+	font-size: 0.875rem !important;
+	font-weight: 500 !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	margin-top: 2rem !important;
+}
+
+.ui-button:hover, .button:hover {
+	transform: scale(1.02) !important;
+	box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3) !important;
+}
+
+.ui-button:active, .button:active {
+	transform: scale(0.98) !important;
+}
+
+.toggle-section {
+	text-align: center;
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #e5e7eb;
+}
+
+.toggle-text {
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+
+.toggle-link {
+	color: #2563eb;
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.2s ease;
+}
+
+.toggle-link:hover {
+	color: #9333ea;
+	text-decoration: underline;
+}
+
+.footer {
+	text-align: center;
+	margin-top: 2rem;
+	color: #9ca3af;
+	font-size: 0.75rem;
+}
+
+/* Remove PrimeFaces default styling conflicts */
+.ui-panel .ui-panel-content {
+	padding: 0 !important;
+	border: none !important;
+}
+
+.ui-panel {
+	border: none !important;
+	background: transparent !important;
+}
+
+.ui-panel .ui-panel-titlebar {
+	border: none !important;
+	background: transparent !important;
+	padding: 0 !important;
+}
+
+.ui-messages {
+	margin-bottom: 1rem;
+}
+
+/* Responsive design */
+@media ( max-width : 640px) {
+	.container {
+		padding: 0 1rem;
+	}
+	.card-header {
+		padding: 1.5rem 1.5rem 1rem;
+	}
+	.card-content {
+		padding: 0 1.5rem 1.5rem;
+	}
+	.form-row {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+	.brand-title {
+		font-size: 1.75rem;
+	}
+}
+</style>
+</h:head>
+<h:body>
+<h:form>
+	<div class="container">
+		<!-- Header with branding -->
+		<div class="header">
+			<div class="logo">
+				<svg viewBox="0 0 24 24">
+                    <path
+						d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+                </svg>
+			</div>
+			<h1 class="brand-title">PassItOn</h1>
+			<p class="brand-subtitle">Student Knowledge Sharing Platform</p>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h2 class="card-title">
+					<h:outputText
+						value="#{loginBean.isLogin ? 'Welcome Back' : 'Join PassItOn'}" />
+				</h2>
+				<p class="card-description">
+					<h:outputText
+						value="#{loginBean.isLogin ? 'Sign in to access your student resources' : 'Create your account to start sharing knowledge'}" />
+				</p>
+			</div>
+
+			<div class="card-content">
+				<p:messages showDetail="true" autoUpdate="true" />
+
+				<!-- Login Form -->
+				<h:form id="loginForm" rendered="#{loginBean.isLogin}">
+					<div class="form-group">
+						<label class="label" for="loginMatric">Matric Number</label>
+						<p:inputText id="loginMatric" value="#{loginBean.matricNumber}"
+							required="true" placeholder="e.g., CSC/20/1234"
+							>
+							<p:clientValidator />
+						</p:inputText>
+					</div>
+
+					<div class="form-group">
+						<label class="label" for="loginPassword">Password</label>
+						<p:password id="loginPassword" value="#{loginBean.password}"
+							required="true" placeholder="Enter your password"
+							feedback="false" >
+							<f:validateLength minimum="6" />
+							<p:clientValidator />
+						</p:password>
+					</div>
+
+					<p:commandButton value="Sign In" action="#{loginBean.login}"
+						update="@form" styleClass="button" icon="pi pi-sign-in" />
+				</h:form>
+
+				<!-- Signup Form -->
+				<h:form id="signupForm" rendered="#{not loginBean.isLogin}">
+					<div class="form-group">
+						<label class="label" for="signupMatric">Matric Number</label>
+						<p:inputText id="signupMatric" value="#{loginBean.matricNumber}"
+							required="true" placeholder="e.g., CSC/20/1234"
+							autocomplete="username">
+							
+						</p:inputText>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group">
+							<label class="label" for="firstName">First Name</label>
+							<p:inputText id="firstName" value="#{loginBean.firstName}"
+								required="true" placeholder="John" autocomplete="given-name">
+								<p:clientValidator />
+							</p:inputText>
+						</div>
+						<div class="form-group">
+							<label class="label" for="lastName">Last Name</label>
+							<p:inputText id="lastName" value="#{loginBean.lastName}"
+								required="true" placeholder="Doe" autocomplete="family-name">
+								<p:clientValidator />
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="label" for="signupPassword">Password</label>
+						<p:password id="signupPassword" value="#{loginBean.password}"
+							required="true" placeholder="Enter your password"
+							feedback="false" autocomplete="new-password">
+							<f:validateLength minimum="6" />
+							<p:clientValidator />
+						</p:password>
+					</div>
+
+					<div class="form-group">
+						<label class="label" for="confirmPassword">Confirm
+							Password</label>
+						<p:password id="confirmPassword"
+							value="#{loginBean.confirmPassword}" required="true"
+							placeholder="Confirm your password" feedback="false"
+							autocomplete="new-password">
+							<f:validateLength minimum="6" />
+							<p:clientValidator />
+						</p:password>
+					</div>
+
+					<p:commandButton value="Create Account"
+						action="#{loginBean.signup}" update="@form" styleClass="button"
+						icon="pi pi-user-plus" />
+				</h:form>
+
+				<!-- Toggle Section -->
+				<div class="toggle-section">
+					<p class="toggle-text">
+						<h:outputText
+							value="#{loginBean.isLogin ? 'Don\'t have an account?' : 'Already have an account?'}" />
+						<h:commandLink
+							value="#{loginBean.isLogin ? 'Sign up' : 'Sign in'}"
+							action="#{loginBean.toggleForm}" styleClass="toggle-link"
+							onclick="this.style.pointerEvents='none';"
+							oncomplete="this.style.pointerEvents='auto';">
+							<f:ajax execute="@this" render="@all" />
+						</h:commandLink>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<p>© 2024 PassItOn. All rights reserved.</p>
+		</div>
+	</div>
+</h:form>
+</h:body>
+</html>
